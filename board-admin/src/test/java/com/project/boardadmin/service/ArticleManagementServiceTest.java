@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.boardadmin.domain.constant.RoleType;
 import com.project.boardadmin.dto.ArticleDto;
 import com.project.boardadmin.dto.AdminAccountDto;
+import com.project.boardadmin.dto.UserAccountDto;
 import com.project.boardadmin.dto.properties.ProjectProperties;
 import com.project.boardadmin.dto.response.ArticleClientResponse;
 import org.junit.jupiter.api.DisplayName;
@@ -156,7 +157,7 @@ class ArticleManagementServiceTest {
         private ArticleDto createArticleDto(String title, String content) {
             return ArticleDto.of(
                     1L,
-                    createAdminAccountDto(),
+                    createUserAccountDto(),
                     title,
                     content,
                     null,
@@ -167,11 +168,9 @@ class ArticleManagementServiceTest {
             );
         }
 
-        private AdminAccountDto createAdminAccountDto() {
-            return AdminAccountDto.of(
+        private UserAccountDto createUserAccountDto() {
+            return UserAccountDto.of(
                     "unoTest",
-                    "pw",
-                    Set.of(RoleType.ADMIN),
                     "uno-test@email.com",
                     "uno-test",
                     "test memo"
