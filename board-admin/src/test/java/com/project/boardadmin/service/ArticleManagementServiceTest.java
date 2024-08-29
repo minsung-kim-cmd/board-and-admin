@@ -22,7 +22,6 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
