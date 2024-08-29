@@ -2,8 +2,8 @@ package com.project.boardadmin.controller;
 
 import com.project.boardadmin.config.SecurityConfig;
 import com.project.boardadmin.domain.constant.RoleType;
+import com.project.boardadmin.dto.AdminAccountDto;
 import com.project.boardadmin.dto.ArticleCommentDto;
-import com.project.boardadmin.dto.UserAccountDto;
 import com.project.boardadmin.service.ArticleCommentManagementService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -94,7 +94,7 @@ class ArticleCommentManagementControllerTest {
         return ArticleCommentDto.of(
                 1L,
                 1L,
-                createUserAccountDto(),
+                createAdminAccountDto(),
                 null,
                 content,
                 LocalDateTime.now(),
@@ -104,8 +104,8 @@ class ArticleCommentManagementControllerTest {
         );
     }
 
-    private UserAccountDto createUserAccountDto() {
-        return UserAccountDto.of(
+    private AdminAccountDto createAdminAccountDto() {
+        return AdminAccountDto.of(
                 "unoTest",
                 "pw",
                 Set.of(RoleType.ADMIN),

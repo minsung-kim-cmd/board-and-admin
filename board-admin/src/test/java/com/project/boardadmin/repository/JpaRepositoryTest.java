@@ -1,6 +1,6 @@
 package com.project.boardadmin.repository;
 
-import com.project.boardadmin.domain.UserAccount;
+import com.project.boardadmin.domain.AdminAccount;
 import com.project.boardadmin.domain.constant.RoleType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,51 +22,51 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import(JpaRepositoryTest.TestJpaConfig.class)
 @DataJpaTest
 class JpaRepositoryTest {
-    private final UserAccountRepository userAccountRepository;
+    private final AdminAccountRepository adminAccountRepository;
 
-    public JpaRepositoryTest(@Autowired UserAccountRepository userAccountRepository) {
-        this.userAccountRepository = userAccountRepository;
+    public JpaRepositoryTest(@Autowired AdminAccountRepository adminAccountRepository) {
+        this.adminAccountRepository = adminAccountRepository;
     }
 
     @DisplayName("회원 정보 select 테스트")
     @Test
-    void givenUserAccounts_whenSelecting_thenWorksFine() {
+    void givenAdminAccounts_whenSelecting_thenWorksFine() {
         // Given
 
         // When
-        List<UserAccount> UserAccounts = userAccountRepository.findAll();
+        List<AdminAccount> adminAccounts = adminAccountRepository.findAll();
 
         // Then
-        assertThat(UserAccounts)
+        assertThat(adminAccounts)
                 .isNotNull()
                 .hasSize(4);
     }
 
     @DisplayName("회원 정보 insert 테스트")
     @Test
-    void givenUserAccount_whenInserting_thenWorksFine() {
+    void givenAdminAccount_whenInserting_thenWorksFine() {
         // Given
-        long previousCount = userAccountRepository.count();
-        UserAccount userAccount = UserAccount.of("test", "pw", Set.of(RoleType.DEVELOPER), null, null, null);
+        long previousCount = adminAccountRepository.count();
+        AdminAccount adminAccount = AdminAccount.of("test", "pw", Set.of(RoleType.DEVELOPER), null, null, null);
 
         // When
-        userAccountRepository.save(userAccount);
+        adminAccountRepository.save(adminAccount);
 
         // Then
-        assertThat(userAccountRepository.count()).isEqualTo(previousCount + 1);
+        assertThat(adminAccountRepository.count()).isEqualTo(previousCount + 1);
     }
 
     @DisplayName("회원 정보 update 테스트")
     @Test
-    void givenUserAccountAndRoleType_whenUpdating_thenWorksFine() {
+    void givenAdminAccountAndRoleType_whenUpdating_thenWorksFine() {
         // Given
-        UserAccount UserAccount = userAccountRepository.getReferenceById("uno");
-        UserAccount.addRoleType(RoleType.DEVELOPER);
-        UserAccount.addRoleTypes(List.of(RoleType.USER, RoleType.USER));
-        UserAccount.removeRoleType(RoleType.ADMIN);
+        AdminAccount AdminAccount = adminAccountRepository.getReferenceById("uno");
+        AdminAccount.addRoleType(RoleType.DEVELOPER);
+        AdminAccount.addRoleTypes(List.of(RoleType.USER, RoleType.USER));
+        AdminAccount.removeRoleType(RoleType.ADMIN);
 
         // When
-        UserAccount updatedAccount = userAccountRepository.saveAndFlush(UserAccount);
+        AdminAccount updatedAccount = adminAccountRepository.saveAndFlush(AdminAccount);
 
         // Then
         assertThat(updatedAccount)
@@ -76,16 +76,16 @@ class JpaRepositoryTest {
 
     @DisplayName("회원 정보 delete 테스트")
     @Test
-    void givenUserAccount_whenDeleting_thenWorksFine() {
+    void givenAdminAccount_whenDeleting_thenWorksFine() {
         // Given
-        long previousCount = userAccountRepository.count();
-        UserAccount UserAccount = userAccountRepository.getReferenceById("uno");
+        long previousCount = adminAccountRepository.count();
+        AdminAccount AdminAccount = adminAccountRepository.getReferenceById("uno");
 
         // When
-        userAccountRepository.delete(UserAccount);
+        adminAccountRepository.delete(AdminAccount);
 
         // Then
-        assertThat(userAccountRepository.count()).isEqualTo(previousCount - 1);
+        assertThat(adminAccountRepository.count()).isEqualTo(previousCount - 1);
     }
 
 

@@ -1,7 +1,7 @@
 package com.project.boardadmin.dto.security;
 
 import com.project.boardadmin.domain.constant.RoleType;
-import com.project.boardadmin.dto.UserAccountDto;
+import com.project.boardadmin.dto.AdminAccountDto;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -44,7 +44,7 @@ public record BoardAdminPrincipal(
         );
     }
 
-    public static BoardAdminPrincipal from(UserAccountDto dto) {
+    public static BoardAdminPrincipal from(AdminAccountDto dto) {
         return BoardAdminPrincipal.of(
                 dto.userId(),
                 dto.userPassword(),
@@ -55,8 +55,8 @@ public record BoardAdminPrincipal(
         );
     }
 
-    public UserAccountDto toDto() {
-        return UserAccountDto.of(
+    public AdminAccountDto toDto() {
+        return AdminAccountDto.of(
                 username,
                 password,
                 authorities.stream().map(GrantedAuthority::getAuthority).map(RoleType::valueOf).collect(Collectors.toUnmodifiableSet()),

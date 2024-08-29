@@ -3,7 +3,7 @@ package com.project.boardadmin.controller;
 import com.project.boardadmin.config.SecurityConfig;
 import com.project.boardadmin.domain.constant.RoleType;
 import com.project.boardadmin.dto.ArticleDto;
-import com.project.boardadmin.dto.UserAccountDto;
+import com.project.boardadmin.dto.AdminAccountDto;
 import com.project.boardadmin.service.ArticleManagementService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -106,8 +106,8 @@ class ArticleManagementControllerTest {
         );
     }
 
-    private UserAccountDto createUserAccountDto() {
-        return UserAccountDto.of(
+    private AdminAccountDto createUserAccountDto() {
+        return AdminAccountDto.of(
                 "unoTest",
                 "pw",
                 Set.of(RoleType.ADMIN),
