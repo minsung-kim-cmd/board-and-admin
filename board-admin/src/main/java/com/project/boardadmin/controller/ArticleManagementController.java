@@ -14,6 +14,7 @@ public class ArticleManagementController {
 
     private final ArticleManagementService articleManagementService;
 
+    @GetMapping
     public String articles(Model model) {
         model.addAttribute(
                 "articles",

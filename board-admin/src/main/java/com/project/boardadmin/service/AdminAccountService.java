@@ -1,6 +1,7 @@
 package com.project.boardadmin.service;
 
 
+import com.project.boardadmin.domain.AdminAccount;
 import com.project.boardadmin.domain.constant.RoleType;
 import com.project.boardadmin.dto.AdminAccountDto;
 import com.project.boardadmin.repository.AdminAccountRepository;
@@ -19,19 +20,26 @@ public class AdminAccountService {
 
     private final AdminAccountRepository adminAccountRepository;
 
+    @Transactional(readOnly = true)
     public Optional<AdminAccountDto> searchUser(String username) {
-        return Optional.empty();
+        return adminAccountRepository.findById(username)
+                .map(AdminAccountDto::from);
     }
 
     public AdminAccountDto saveUser(String username, String password, Set<RoleType> roleTypes, String email, String nickname, String memo) {
-        return null;
+        return AdminAccountDto.from(
+                adminAccountRepository.save(AdminAccount.of(username, password, roleTypes, email, nickname, memo, username))
+        );
     }
 
+    @Transactional(readOnly = true)
     public List<AdminAccountDto> users() {
-        return List.of();
+        return adminAccountRepository.findAll().stream()
+                .map(AdminAccountDto::from)
+                .toList();
     }
 
     public void deleteUser(String username) {
-
+        adminAccountRepository.deleteById(username);
     }
 }
